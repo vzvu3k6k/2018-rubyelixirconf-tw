@@ -1,0 +1,23 @@
+{
+  "name": "ruby-ast-slides",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build -- --watch",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "vzvu3k6k <vzvu3k6k@gmail.com>",
+  "license": "CC0-1.0",
+  "private": true,
+  "dependencies": {
+    "css-loader": "^0.28.9",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^2.30.1",
+    "pug-html-loader": "^1.1.5",
+    "reveal.js": "^3.6.0",
+    "style-loader": "^0.20.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0"
+  }
+}

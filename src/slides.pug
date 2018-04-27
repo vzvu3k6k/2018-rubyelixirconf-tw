@@ -1,0 +1,114 @@
+section
+  p You can see this slide on Gist.
+  p Search "#rubyconftw AST" on Twitter.
+section
+  h1 AST Tools for Your Daily Development
+  aside
+    | Thank you.
+    | In this talk, I'll share some tips to help your daily development on Ruby, focusing tools to parse Ruby code.
+section
+  h2 Agenda
+  ul
+    li Parse Ruby code
+    li Use parsed code
+    li Analyze parsed code: search string literals
+    li Rewrite parsed code: ad-hoc refactoring tool
+    li Advanced: Writing your own RuboCop rule
+    li Other resources
+section
+  h2 Parse Ruby code
+  p Sounds difficult?
+  .fragment
+    ul
+      li
+        code ruby --dump=parsetree
+      li ripper (standard library)
+      li parser (gem)
+  aside
+    | So let's parse Ruby code. It sounds difficult to parse Ruby, and in fact, it's difficult. But we have a lot of tools to parse Ruby for us.
+    | I'll show you how they work.
+    | First, let's see ruby's dump option. ...It looks complecated, but we can see this is a method definition, and this is a body of the method, and so on. Unfortunately, this dump is unstable and we can't build applications on this.
+    | Next, let's see how ripper works. Ripper is a standard library, so we don't have to `gem install ripper`.
+    | Lastly, try parser. This name may sounds too general, but it is a gem to parse Ruby code. Probably other names have already been taken. And this is an output.
+section
+  h2 Choose a library
+  ul
+    li
+      | I recommend 
+      a(href="https://github.com/whitequark/parser")
+        | Parser
+      | .
+      ul
+        li Well-documented syntax tree
+    li Use Ripper if performance matters.
+  aside
+    | So which library should we use? I think you should start with Parser and, if performance matters, switch to Ripper.
+section
+  h2 Poke around Parser's AST
+  ul
+    li 
+      code
+        | ruby-parse -L -e 'puts "Hello."'
+    li
+      code
+        | pry -rparser/current
+    li
+      a(href="https://github.com/pocke/rpr")
+        code rpr
+  aside
+    | So let's see Parser's AST more deeply. Parser gem provides a CLI tool or we can use a nice tool "rpr" authored by Masataka Kuwabata, but here I'll simply use `pry`.
+    | (Each node has type, children and location.)
+section
+  h2 Analyze parsed code
+  p
+    | Search string literals
+  aside
+    | I'll show a simple example to search string literals.
+section
+  h2 Rewrite parsed code
+  p
+    | Replace string literals
+  aside
+    | Next, let's rewrite code.
+section
+  h2 Writing your own RuboCop rule
+  aside
+    | Now we know how to use Parser gem.
+    | Next, let's try to write our own RuboCop.
+section
+  h2 RuboCop
+  img(src="../img/rubocop.png")
+  aside
+    | RuboCop is a linting tool. It finds bad code and warns like this. RuboCop has many rules and I'll add another rule here.
+section
+  p Warns too many positional arguments
+  pre
+    code
+      | def bad_method(a, b, c, d) # Bad!
+      | end
+      |
+      | def good_method(a:, b:, c:, d:) # Good!
+      | end
+  aside
+    | Here I want to warn if a method takes too many positional arguments.
+section
+  h2 Demo
+  p Live Coding (if there is time)
+section
+  h2 Other resources
+  ul
+    li
+      a(href="https://github.com/xinminlabs/synvert")
+        | synvert
+      |  by Richard Huang
+      ul
+        li 
+          a(href="http://xinminlabs.github.io/synvert-rubyconf-tw-2014")
+            | Slide
+        li
+          a(href="https://www.youtube.com/watch?v=h4iircZZtFM")
+            | Video
+  aside
+    | And there is another impressive tool synvert, which I didn't mention in this talk. Synvert is a framework and DSL to build a code translator and is suitable for writing non-ad-hoc scripts. If you like this talk, you should watch this presentation in RubyConf Taiwan 2014.
+section
+  h2 Questions?
