@@ -15,7 +15,7 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section><p>You can see this slide on Gist.</p><p>Search "#rubyconftw AST" on Twitter.</p></section><section><h1>AST Tools for Your Daily Development</h1><aside>Thank you.
+        <section><h1>AST Tools for Your Daily Development</h1><aside>Thank you.
 In this talk, I'll share some tips to help your daily development on Ruby, focusing tools to parse Ruby code.</aside></section><section><h2>Agenda</h2><ul><li>Parse Ruby code</li><li>Use parsed code</li><li>Analyze parsed code: search string literals</li><li>Rewrite parsed code: ad-hoc refactoring tool</li><li>Advanced: Writing your own RuboCop rule</li><li>Other resources</li></ul></section><section><h2>Parse Ruby code</h2><p>Sounds difficult?</p><div class="fragment"><ul><li><code>ruby --dump=parsetree</code></li><li>ripper (standard library)</li><li>parser (gem)</li></ul></div><aside>So let's parse Ruby code. It sounds difficult to parse Ruby, and in fact, it's difficult. But we have a lot of tools to parse Ruby for us.
 I'll show you how they work.
 First, let's see ruby's dump option. ...It looks complecated, but we can see this is a method definition, and this is a body of the method, and so on. Unfortunately, this dump is unstable and we can't build applications on this.
